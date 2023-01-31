@@ -5,7 +5,7 @@ import { createContext, useState } from 'react'
 import themeConfig from 'src/configs/themeConfig'
 
 const initialSettings = {
-  themeColor: 'primary',
+  themeColor: 'info',
   mode: themeConfig.mode,
   contentWidth: themeConfig.contentWidth
 }
