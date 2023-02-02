@@ -28,10 +28,11 @@ const HeaderTitle = styled(Typography)(({ theme }) => ({
   transition: 'opacity .25s ease-in-out, margin .25s ease-in-out'
 }))
 
-const StyledLink = styled('a')({
+const StyledLink = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  width: "100%"
 })
 
 const VerticalNavHeader = props => {
@@ -46,10 +47,10 @@ const VerticalNavHeader = props => {
       {userVerticalNavMenuBranding ? (
         userVerticalNavMenuBranding(props)
       ) : (
-        <Link href='/' passHref>
+        <Link style={{ textDecoration: 'none'}} href='/' passHref>
           <StyledLink>
             <Image
-              width={35} 
+              width={35}
               height={35}
               src="/images/logo_danova.svg"
               alt="logo"

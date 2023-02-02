@@ -13,12 +13,12 @@ import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 const navigation = () => {
   return [
     {
-      title: 'Dashboard',
+      title: 'Beranda',
       icon: HomeOutline,
-      path: '/'
+      path: '/beranda'
     },
     {
-      title: 'Account Settings',
+      title: 'Pengaturan Akun',
       icon: AccountCogOutline,
       path: '/account-settings'
     },
