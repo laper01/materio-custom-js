@@ -227,35 +227,28 @@ const LoginPage = () => {
               <Typography variant='body2' sx={{ marginRight: 2 }}>
                 New on our platform?
               </Typography>
-              <Typography variant='body2'>
-                <Link passHref href='/pages/register'>
+              <Link passHref href='/pages/register'>
+                <Typography variant='body2'>
+                  </Typography>
                   <LinkStyled>Create an account</LinkStyled>
-                </Link>
-              </Typography>
+              </Link>
+
             </Box>
             <Divider sx={{ my: 5 }}>or</Divider>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Facebook sx={{ color: '#497ce2' }} />
-                </IconButton>
+                <Facebook sx={{ color: '#497ce2' }} />
               </Link>
               <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Twitter sx={{ color: '#1da1f2' }} />
-                </IconButton>
+                <Twitter sx={{ color: '#1da1f2' }} />
               </Link>
               <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
-                  />
-                </IconButton>
+                <Github
+                  sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
+                />
               </Link>
               <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Google sx={{ color: '#db4437' }} />
-                </IconButton>
+                <Google sx={{ color: '#db4437' }} />
               </Link>
             </Box>
           </form>
