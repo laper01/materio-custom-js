@@ -27,6 +27,9 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** Global css styles
 import '../../styles/globals.css'
 
+// next auth
+import { SessionProvider } from 'next-auth/react'
+
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -63,8 +66,13 @@ const App = props => {
 
       <SettingsProvider>
         <SettingsConsumer>
+
           {({ settings }) => {
-            return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+            return <ThemeComponent settings={settings}>
+              <SessionProvider session={pageProps.session}>
+                {getLayout(<Component {...pageProps} />)}
+              </SessionProvider>
+            </ThemeComponent>
           }}
         </SettingsConsumer>
       </SettingsProvider>

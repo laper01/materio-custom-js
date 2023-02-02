@@ -40,6 +40,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 // next auth
+import { signIn } from "next-auth/react";
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -69,22 +70,14 @@ const LoginPage = () => {
 
   const [domLoaded, setDomLoaded] = useState(false);
 
-  useEffect(() => {
-    setDomLoaded(true);
-  }, []);
-
-  // useEffect(() => {
-  //   setExpand(localStorage.getItem(EXPAND_STORAGE_KEY) === '1');
-  // }, []);
-
-
-
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
 
   async function login() {
 
+  const response = await signIn("credentials", { email: values.email, password: values.password, redirect: false });
+    // console.log(response);
   }
 
   const handleChange = prop => event => {

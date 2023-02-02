@@ -1,26 +1,26 @@
-// import NextAuth from "next-auth";
-// import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from "next-auth";
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 const authOptions = {
-  session:{
+  session: {
     strategy: 'jwt'
   },
-  providers:[
+  providers: [
     CredentialsProvider({
       type: 'credentials',
       credential: {},
-       authorize(credential, req){
+      authorize(credential, req) {
         const { email, password } = credential;
         // peform oyu login logic
         // find out user from db
-        if(email !== 'admin' || password !== '123'){
-          return null;
+        if (email !== 'admin' || password !== '123') {
+          throw new Error("login gagal");
         }
-        return {id:'12', name: 'admin', email:'admin', };
+        return { id: '12', name: 'admin', email: 'admin', };
       }
     })
   ],
-  pages:{
+  pages: {
     signIn: '/',
     // error: '/error',
     // signOut: ''
