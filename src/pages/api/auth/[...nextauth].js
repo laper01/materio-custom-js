@@ -1,3 +1,4 @@
+
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -16,7 +17,12 @@ const authOptions = {
         if (email !== 'admin' || password !== '123') {
           throw new Error('login gagal')
         }
-        return { id: '12', name: 'admin', email: 'admin' }
+        return {
+          id: '12',
+          name: 'admin',
+          email: 'admin',
+          role : 'admin'
+        }
       }
     })
   ],
@@ -24,6 +30,17 @@ const authOptions = {
     signIn: '/'
     // error: '/error',
     // signOut: ''
+  },
+  callbacks:{
+    jwt(params){
+      // console.log(params)
+      // menulis ulang token agar bisa memasukan role
+      if(params.user?.role){
+        params.token.role = params.user.role;
+      }
+      // return final token
+      return params.token;
+    }
   }
 }
 

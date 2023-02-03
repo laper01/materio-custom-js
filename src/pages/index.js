@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 // ** Next Imports
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -40,7 +41,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 // next auth
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -68,6 +69,8 @@ const LoginPage = () => {
     showPassword: false
   })
 
+  const { status, data } = useSession();
+
   const [domLoaded, setDomLoaded] = useState(false)
 
   // ** Hook
@@ -76,8 +79,13 @@ const LoginPage = () => {
 
   async function login() {
     const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
-    // console.log(response);
   }
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      Router.replace('/beranda')
+    }
+  }, [status])
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })

@@ -1,13 +1,18 @@
-// import middleware from "next-auth/middleware";
-// import { NextResponse } from 'next/server'
 
-// export default function middleware(req) {
-//   let url = req.url
-//   if (url.includes('/beranda')) {
-//     return NextResponse.redirect('http://localhost:3000/')
-//   }
-// }
+import { withAuth } from 'next-auth/middleware';
+import { NextRequest, NextResponse } from 'next/server';
 
-export { default } from 'next-auth/middleware';
+export default withAuth(
+  function middleware(req) {
+    return NextResponse.rewrite(new URL('/beranda', req.url));
+  }, {
+  callbacks: {
+    authorized({token}) {
+      // harus return true kalo mau bisa diakases middleware
+      return token?.role === 'admin';
+    }
+  }
+});
 
-export const config = { matcher: ['/beranda'] }
+
+export const config = { matcher: ['/beranda'] };
