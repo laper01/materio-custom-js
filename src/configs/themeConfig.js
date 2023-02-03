@@ -1,8 +1,8 @@
-const appName = 'danova';
+const appName = 'danova'
 
 const themeConfig = {
   // ** Layout Configs
-  templateName: `${appName}`, /* App Name */
+  templateName: `${appName}` /* App Name */,
   templateDescription: `${appName} template untuk aplikasi next js bisa di ganti dithemeConfig.js`,
   keyWords: 'ganti di dithemeConfig.js',
   mode: 'light' /* light | dark */,

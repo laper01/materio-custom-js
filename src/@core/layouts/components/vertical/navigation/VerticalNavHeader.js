@@ -32,7 +32,7 @@ const StyledLink = styled('div')({
   display: 'flex',
   alignItems: 'center',
   textDecoration: 'none',
-  width: "100%"
+  width: '100%'
 })
 
 const VerticalNavHeader = props => {
@@ -47,14 +47,9 @@ const VerticalNavHeader = props => {
       {userVerticalNavMenuBranding ? (
         userVerticalNavMenuBranding(props)
       ) : (
-        <Link style={{ textDecoration: 'none'}} href='/' passHref>
+        <Link style={{ textDecoration: 'none' }} href='/' passHref>
           <StyledLink>
-            <Image
-              width={35}
-              height={35}
-              src="/images/logo_danova.svg"
-              alt="logo"
-            />
+            <Image width={35} height={35} src='/images/logo_danova.svg' alt='logo' />
             <HeaderTitle variant='h6' sx={{ ml: 3 }}>
               {themeConfig.templateName}
             </HeaderTitle>

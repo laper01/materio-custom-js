@@ -1,5 +1,5 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
 
 const authOptions = {
   session: {
@@ -10,21 +10,21 @@ const authOptions = {
       type: 'credentials',
       credential: {},
       authorize(credential, req) {
-        const { email, password } = credential;
+        const { email, password } = credential
         // peform oyu login logic
         // find out user from db
         if (email !== 'admin' || password !== '123') {
-          throw new Error("login gagal");
+          throw new Error('login gagal')
         }
-        return { id: '12', name: 'admin', email: 'admin', };
+        return { id: '12', name: 'admin', email: 'admin' }
       }
     })
   ],
   pages: {
-    signIn: '/',
+    signIn: '/'
     // error: '/error',
     // signOut: ''
   }
-};
+}
 
-export default NextAuth(authOptions);
+export default NextAuth(authOptions)

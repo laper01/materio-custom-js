@@ -56,23 +56,19 @@ const App = props => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{themeConfig.templateName}</title>
-        <meta
-          name='description'
-          content={`${themeConfig.templateDescription}`}
-        />
+        <meta name='description' content={`${themeConfig.templateDescription}`} />
         <meta name='keywords' content={`${themeConfig.keyWords}`} />
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
 
       <SettingsProvider>
         <SettingsConsumer>
-
           {({ settings }) => {
-            return <ThemeComponent settings={settings}>
-              <SessionProvider session={pageProps.session}>
-                {getLayout(<Component {...pageProps} />)}
-              </SessionProvider>
-            </ThemeComponent>
+            return (
+              <ThemeComponent settings={settings}>
+                <SessionProvider session={pageProps.session}>{getLayout(<Component {...pageProps} />)}</SessionProvider>
+              </ThemeComponent>
+            )
           }}
         </SettingsConsumer>
       </SettingsProvider>

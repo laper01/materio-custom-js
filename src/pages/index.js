@@ -40,7 +40,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 // next auth
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -68,15 +68,14 @@ const LoginPage = () => {
     showPassword: false
   })
 
-  const [domLoaded, setDomLoaded] = useState(false);
+  const [domLoaded, setDomLoaded] = useState(false)
 
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
 
   async function login() {
-
-  const response = await signIn("credentials", { email: values.email, password: values.password, redirect: false });
+    const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
     // console.log(response);
   }
 
@@ -171,12 +170,20 @@ const LoginPage = () => {
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Welcome to {themeConfig.templateName}! 👋🏻  🔥
+              Welcome to {themeConfig.templateName}! 👋🏻 🔥
             </Typography>
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault}>
-            <TextField value={values.email} onChange={handleChange('email')} autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField
+              value={values.email}
+              onChange={handleChange('email')}
+              autoFocus
+              fullWidth
+              id='email'
+              label='Email'
+              sx={{ marginBottom: 4 }}
+            />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -207,13 +214,7 @@ const LoginPage = () => {
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
             </Box>
-            <Button
-              fullWidth
-              size='large'
-              variant='contained'
-              sx={{ marginBottom: 7 }}
-              onClick={login}
-            >
+            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={login}>
               Login
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -221,11 +222,9 @@ const LoginPage = () => {
                 New on our platform?
               </Typography>
               <Link passHref href='/pages/register'>
-                <Typography variant='body2'>
-                  </Typography>
-                  <LinkStyled>Create an account</LinkStyled>
+                <Typography variant='body2'></Typography>
+                <LinkStyled>Create an account</LinkStyled>
               </Link>
-
             </Box>
             <Divider sx={{ my: 5 }}>or</Divider>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

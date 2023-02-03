@@ -53,8 +53,7 @@ const AppBarContent = props => {
             rel='noreferrer'
             sx={{ mr: 4, display: 'flex' }}
             href='https://github.com/themeselection/materio-mui-react-nextjs-admin-template-free'
-          >
-          </Box>
+          ></Box>
         )}
         <ModeToggler settings={settings} saveSettings={saveSettings} />
         <NotificationDropdown />
