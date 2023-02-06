@@ -41,7 +41,6 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 //custome hook
-import useAuth from '../../lib/hooks/useAuth';
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -74,8 +73,6 @@ const LoginPage = () => {
 
   // ** Hook
   const theme = useTheme()
-
-  const { login } = useAuth();
 
   async function loginSend() {
     // const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })

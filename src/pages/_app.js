@@ -30,6 +30,10 @@ import '../../styles/globals.css'
 // next auth
 import { SessionProvider } from 'next-auth/react'
 
+//  redux
+import { Provider } from 'react-redux';
+import { wrapper } from 'store/store'
+
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -47,7 +51,11 @@ if (themeConfig.routingLoader) {
 
 // ** Configure JSS & ClassName
 const App = props => {
+
+
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+
+  const { store } = wrapper.useWrappedStore(pageProps);
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
@@ -66,7 +74,9 @@ const App = props => {
           {({ settings }) => {
             return (
               <ThemeComponent settings={settings}>
-                <SessionProvider session={pageProps.session}>{getLayout(<Component {...pageProps} />)}</SessionProvider>
+                <Provider store={store}>
+                  {getLayout(<Component {...pageProps} />)}
+                </Provider>
               </ThemeComponent>
             )
           }}
