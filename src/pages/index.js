@@ -40,8 +40,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
-// next auth
-import { signIn, useSession } from 'next-auth/react'
+//custome hook
+import useAuth from '../../lib/hooks/useAuth';
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -66,26 +66,24 @@ const LoginPage = () => {
   const [values, setValues] = useState({
     email: '',
     password: '',
+    remember: false,
     showPassword: false
   })
-
-  const { status, data } = useSession();
-
-  const [domLoaded, setDomLoaded] = useState(false)
+  // state
+  const [errors, setErrors] = useState([]);
 
   // ** Hook
   const theme = useTheme()
-  const router = useRouter()
 
-  async function login() {
-    const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
+  const { login } = useAuth();
+
+  async function loginSend() {
+    // const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
+    await login({ email: values.email, password: values.password, remember: values.remember, setErrors })
+    // console.log(response);
+    console.log(errors);
   }
 
-  useEffect(() => {
-    if (status === 'authenticated') {
-      Router.replace('/beranda')
-    }
-  }, [status])
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -101,6 +99,7 @@ const LoginPage = () => {
 
   return (
     <Box className='content-center'>
+      {errors}
       <Card sx={{ zIndex: 1 }}>
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -222,7 +221,7 @@ const LoginPage = () => {
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
             </Box>
-            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={login}>
+            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={loginSend}>
               Login
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
