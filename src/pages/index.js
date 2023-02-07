@@ -41,6 +41,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 //custome hook
+import useAuth from '../../lib/hooks/useAuth';
+
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -62,6 +64,7 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 const LoginPage = () => {
   // ** State
+  const { login } = useAuth()
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -77,8 +80,7 @@ const LoginPage = () => {
   async function loginSend() {
     // const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
     await login({ email: values.email, password: values.password, remember: values.remember, setErrors })
-    // console.log(response);
-    console.log(errors);
+
   }
 
 
