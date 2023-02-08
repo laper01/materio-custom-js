@@ -2,6 +2,10 @@
 import { NextResponse } from 'next/server'
 
 export function middlewares(req, res) {
+  // inget ini bentuknya map
+  // const jwt = cookies.get('oursitejwt')?.value;
+  //  apiAuth(jwt, url, req, res);
+
 }
 
 function guest(req) {
@@ -40,7 +44,6 @@ const apiIcon = (handler) => {
 }
 
 export default apiIcon(apiAuth(middlewares));
-
 function matchUrlPattern(patternUrl, url) {
   const pattern = new URLPattern({ pathname: `${patternUrl}*` })
   return pattern.test(url);
