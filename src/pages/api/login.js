@@ -4,10 +4,16 @@ import { serialize } from "cookie";
 const SECRET = process.env.SECRET;
 
 export default async function (req, res) {
+
+  if (req.method !== 'POST') {
+    res.status(405).send({ message: 'Only POST requests allowed' })
+    return
+  }
+
   const { email, password } = req.body;
 
   if (email == 'admin' && password == 'admin') {
-    const serialised = serialize('oursitejwt', "token",{
+    const serialised = serialize('oursitejwt', "token", {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
       sameSite: false,

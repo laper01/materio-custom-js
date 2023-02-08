@@ -41,7 +41,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 //custome hook
-import useAuth from '../../lib/hooks/useAuth';
+import useAuthCostume from '../../lib/hooks/useAuthCostume';
 
 
 // ** Styled Components
@@ -64,7 +64,7 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 const LoginPage = () => {
   // ** State
-  const { login } = useAuth()
+  const { login } = useAuthCostume();
   const [values, setValues] = useState({
     email: '',
     password: '',
