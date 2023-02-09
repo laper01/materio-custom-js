@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 
 const secure = (next) => {
   return async (req, res) => {
-    const securePath = ['/beranda/', 'ggg'];
+
     const { pathname } = req.nextUrl;
     if (securePath.includes(pathname)) {
       const { cookies } = req;
@@ -11,7 +11,6 @@ const secure = (next) => {
       if (!jwt) {
         const urlRedirect = req.nextUrl.clone()
         urlRedirect.pathname = '/'
-        console.log("=")
         return NextResponse.redirect(urlRedirect);
       }
     }
@@ -19,7 +18,7 @@ const secure = (next) => {
   }
 }
 
-
+const securePath = ['/beranda/'];
 
 export default secure;
 
