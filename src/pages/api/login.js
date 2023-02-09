@@ -1,5 +1,7 @@
+
 import { sign } from "jsonwebtoken";
 import { serialize } from "cookie";
+import axios from "../../../lib/axiosLaravel";
 
 const SECRET = process.env.SECRET;
 
@@ -10,21 +12,34 @@ export default async function (req, res) {
     return
   }
 
-  const { email, password } = req.body;
+  // console.log(req.headers);
 
-  if (email == 'admin' && password == 'admin') {
-    const serialised = serialize('oursitejwt', "token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development',
-      sameSite: false,
-      maxAge: 60 * 60,
-      path: "/"
+  const { email, password } = req.body;
+  // TODO :tentuin simpen bearer token di mana
+  try {
+    const response = await axios.post('/api/auth/login', {
+      email: email,
+      password: password
     });
 
-    res.setHeader('set-Cookie', serialised);
-    res.status(200).json({ "message": "Success!" })
-  } else {
-    res.status(401).json({ 'message': 'invalid credential' })
+    console.log(response.data);
+    if (response.data.meta.status == 'success') {
+      const serialised = serialize('oursitejwt', "token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
+        sameSite: false,
+        maxAge: 60 * 60,
+        path: "/"
+      });
+
+      res.setHeader('set-Cookie', serialised);
+      res.status(200).json({ "message": "Success!", "data": response.data })
+    } else {
+      res.status(401).json({ 'message': 'invalid credential' })
+    }
+
+  } catch (error) {
+    console.log(error);
   }
 
 }
