@@ -1,19 +1,13 @@
 
 import { NextResponse } from 'next/server'
+// middleware
+import guest from './middleware/guest';
+import secure from './middleware/secure';
 
-export function middlewares(req, res) {
-  // inget ini bentuknya map
-  // const jwt = cookies.get('oursitejwt')?.value;
-  //  apiAuth(jwt, url, req, res);
+function middlewares(req, res) {
 
 }
 
-function guest(req) {
-  const nonSecurePaths = ['/', '/about', '/contact'];
-  if (nonSecurePaths.includes(req.path)) {
-    return next();
-  }
-}
 
 function user(req) {
 
@@ -33,6 +27,7 @@ const apiAuth = (handler) => {
 
 const apiIcon = (handler) => {
   return async (req, res) => {
+    console.log("api icon")
     const url = req.url;
     if (matchUrlPattern('/icons/', url)) {
       const urlRedirect = req.nextUrl.clone()
@@ -43,8 +38,13 @@ const apiIcon = (handler) => {
   }
 }
 
-export default apiIcon(apiAuth(middlewares));
 function matchUrlPattern(patternUrl, url) {
   const pattern = new URLPattern({ pathname: `${patternUrl}*` })
   return pattern.test(url);
 }
+
+export default guest(
+  secure(
+    middlewares
+  )
+);
