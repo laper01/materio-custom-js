@@ -31,8 +31,11 @@ import '../../styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 
 //  redux
-import { Provider } from 'react-redux';
-import { wrapper } from 'store/store'
+import { persistor, wrapper } from '../redux/store/store';
+import withRedux from 'next-redux-wrapper';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux'
+
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -53,7 +56,7 @@ if (themeConfig.routingLoader) {
 const App = props => {
 
 
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const { store } = wrapper.useWrappedStore(pageProps);
 
@@ -74,8 +77,10 @@ const App = props => {
           {({ settings }) => {
             return (
               <ThemeComponent settings={settings}>
-                <Provider store={store}>
-                  {getLayout(<Component {...pageProps} />)}
+                <Provider store={store} >
+                  <PersistGate loading={null} persistor={persistor}>
+                    {getLayout(<Component {...pageProps} />)}
+                  </PersistGate>
                 </Provider>
               </ThemeComponent>
             )
@@ -86,4 +91,7 @@ const App = props => {
   )
 }
 
-export default App
+const makeStore = () => store;
+
+export default App;
+// export default App;

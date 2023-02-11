@@ -15,7 +15,9 @@ export default async function (req, res) {
   // console.log(req.headers);
 
   const { email, password } = req.body;
-  // TODO :tentuin simpen bearer token di mana
+  // TODO : tentuin simpen bearer token di mana
+  // TODO : simpen bearar token di http only cookie
+  // TODO : encode token menggunkan sign
   try {
     const response = await axios.post('/api/auth/login', {
       email: email,

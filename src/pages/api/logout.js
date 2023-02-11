@@ -19,6 +19,7 @@ export default async function (req, res) {
     return res.json({ "message": "your not loggin" })
   } else {
     try {
+      // TODO : decode http only cookie yang menggunakan bearer token
       const response = await axios.get('api/auth/logout',
         {
           headers: {
