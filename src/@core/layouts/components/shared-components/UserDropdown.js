@@ -23,8 +23,6 @@ import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 
-import useAuthCostume from '../../../../../lib/hooks/useAuthCostume.js';
-
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -39,7 +37,6 @@ const UserDropdown = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
 
-  const { logout } = useAuthCostume();
 
   // ** Hooks
   const router = useRouter()

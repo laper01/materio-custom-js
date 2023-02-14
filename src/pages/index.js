@@ -41,7 +41,6 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 //custome hook
-import useAuthCostume from '../../lib/hooks/useAuthCostume';
 
 
 // ** Styled Components
@@ -64,7 +63,6 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 const LoginPage = () => {
   // ** State
-  const { login } = useAuthCostume();
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -79,7 +77,6 @@ const LoginPage = () => {
 
   async function loginSend() {
     // const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
-    await login({ email: values.email, password: values.password, remember: values.remember, setErrors })
 
   }
 

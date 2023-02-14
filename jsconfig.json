@@ -4,5 +4,5 @@
   },
   "include": [
     "src"
-, "store", "lib/hooks/useAuthCostume.js"  ]
+, "store", "src/lib/hooks/useAuthCostume.js"  ]
 }
