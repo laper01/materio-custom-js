@@ -32,7 +32,6 @@ import { SessionProvider } from 'next-auth/react'
 
 //  redux
 import { persistor, wrapper } from '../redux/store/store';
-import withRedux from 'next-redux-wrapper';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux'
 
@@ -91,7 +90,4 @@ const App = props => {
   )
 }
 
-const makeStore = () => store;
-
 export default App;
-// export default App;
