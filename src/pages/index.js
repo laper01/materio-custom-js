@@ -41,7 +41,10 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
 //custome hook
+import { useAuth } from 'src/hooks/useAuth'
 
+// custome componene
+import InputError from 'src/@core/components/inpur-error'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -69,17 +72,28 @@ const LoginPage = () => {
     remember: false,
     showPassword: false
   })
+
+  const [remember, setRemember] = useState(false);
   // state
   const [errors, setErrors] = useState([]);
+  const [status, setStatus] = useState('');
 
   // ** Hook
   const theme = useTheme()
+  const { login } = useAuth({
+    middleware: 'guest',
+    redirectIfAuthenticated: '/beranda',
+  });
 
   async function loginSend() {
-    // const response = await signIn('credentials', { email: values.email, password: values.password, redirect: false })
-
+    login({
+      email: values.email,
+      password: values.password,
+      remember: remember,
+      setErrors,
+      setStatus,
+    })
   }
-
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -95,7 +109,12 @@ const LoginPage = () => {
 
   return (
     <Box className='content-center'>
-      {errors}
+      {/* {errors.map((error) => {
+        return (
+          <>
+            {error}
+          </>);
+      })} */}
       <Card sx={{ zIndex: 1 }}>
         <CardContent sx={{ padding: theme => `${theme.spacing(12, 9, 7)} !important` }}>
           <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -185,9 +204,11 @@ const LoginPage = () => {
               fullWidth
               id='email'
               label='Email'
-              sx={{ marginBottom: 4 }}
             />
-            <FormControl fullWidth>
+            {/* error input */}
+            <InputError messages={errors.email} />
+
+            <FormControl fullWidth sx={{ marginTop: 4 }}>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
                 label='Password'
@@ -208,11 +229,13 @@ const LoginPage = () => {
                   </InputAdornment>
                 }
               />
+              {/* error input */}
+              <InputError messages={errors.password} />
             </FormControl>
             <Box
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
-              <FormControlLabel control={<Checkbox />} label='Remember Me' />
+              <FormControlLabel control={<Checkbox value={remember} onClick={() => setRemember(!remember)} />} label='Remember Me' />
               <Link passHref href='/'>
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>

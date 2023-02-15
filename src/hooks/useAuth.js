@@ -38,6 +38,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf()
 
+        console.log(props);
+
         setErrors([])
         setStatus(null)
 
@@ -80,6 +82,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
                 router.push('/login?reset=' + btoa(response.data.status)),
             )
             .catch(error => {
+              console.log(error);
                 if (error.response.status !== 422) throw error
 
                 setErrors(error.response.data.errors)
