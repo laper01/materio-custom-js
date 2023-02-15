@@ -22,6 +22,7 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+import { useAuth } from 'src/hooks/useAuth'
 
 
 // ** Styled Components
@@ -41,6 +42,8 @@ const UserDropdown = () => {
   // ** Hooks
   const router = useRouter()
 
+  const { logout } = useAuth();
+
   const handleDropdownOpen = event => {
     setAnchorEl(event.currentTarget)
   }
@@ -52,9 +55,6 @@ const UserDropdown = () => {
     setAnchorEl(null)
   }
 
-  const handleLogout = () => {
-    logout();
-  }
 
   const styles = {
     py: 2,
@@ -150,7 +150,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={handleLogout}>
+        <MenuItem sx={{ py: 2 }} onClick={logout}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>
