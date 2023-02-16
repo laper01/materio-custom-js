@@ -15,6 +15,7 @@ import VerticalAppBarContent from './components/vertical/AppBarContent'
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
 import { useAuth } from 'src/hooks/useAuth'
+import Loading from './components/Loading'
 
 const UserLayout = ({ children }) => {
   // ** Hooks
@@ -55,8 +56,8 @@ const UserLayout = ({ children }) => {
         {children}
       </VerticalLayout>
     )
-  }else{
-    return <div>Loading ...</div>
+  } else {
+    return <Loading />
   }
 
 }

@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import Router from 'next/router'
 
 // ** MUI Components
 import Box from '@mui/material/Box'

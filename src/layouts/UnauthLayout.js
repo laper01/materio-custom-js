@@ -1,5 +1,6 @@
 
 import { useAuth } from "src/hooks/useAuth";
+import Loading from "./components/Loading";
 
 
 const UnauthLayout = ({ children }) => {
@@ -7,7 +8,7 @@ const UnauthLayout = ({ children }) => {
   if (user) {
     return (
       <>
-        loading
+        <Loading />
       </>
     )
 
